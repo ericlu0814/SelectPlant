@@ -65,7 +65,7 @@
       <div class="home_head waypoint show">
           <div class="subtitle">Hot Products</div>
           <h2 class="title">精選商品推薦</h2>
-          <div class="p">對於初次挑選金豐盛的您，我們推薦以下精選商品，<br>
+          <div class="p">對於初次挑選XXX的您，我們推薦以下精選商品，<br>
     點選您有興趣的品項，前往商品頁面一探究竟吧</div>
       </div>
       <div class="pd_block waypoint show">
