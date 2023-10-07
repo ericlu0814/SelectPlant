@@ -100,6 +100,34 @@
       </div>
     </div>
   </section>
+  <!-- <section class="home_news">
+    <div class="news_block">
+      <div class="home_title aos-init aos-animate" data-aos="fade-down" data-aos-delay="100" data-aos-duration="1000" data-aos-once="true">
+        <div class="title_head">NEWS</div>
+        <div class="title_sub">最新消息</div>
+        <p>追蹤我們的最新資訊，活動好禮不間斷!</p>
+      </div>
+      <div class="swiper-container aos-init aos-animate" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000" data-aos-once="true">
+        <div class="news_list swiper-wrapper">
+          <div class="swiper-slide">
+            <a class="news_item" href="https://www.perfectcompanion.com.tw/tw/news/charity/135">
+              <div class="news_bg">
+                <div class="news_img"><img src="/upload/2023_09_195/20230919104539j2mymmWCJ2.png" alt="狗狗洗澡小撇步"></div>
+                <div class="hover"><span class="icon-track"></span>
+                  <p>Find more</p>
+                </div>
+              </div>
+              <div class="news_detail">
+                <div class="news_data">09.19</div>
+                <div class="news_title">狗狗洗澡小撇步</div>
+                <p></p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
   </div>
 </template>
 
