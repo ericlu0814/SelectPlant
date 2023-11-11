@@ -1,6 +1,27 @@
 <template>
   <div class="home">
-    這是首頁
+    <!-- 這是首頁 -->
+    <section class="homebanner">
+      <div class="bn_wrap">
+        <div class="bn_left">
+          <div class="bn_bg" style="background-image: url('./../../../public/img/bn01_1000x1000.jpg');"></div>
+        </div>
+        <div class="bn_right" style="background-color: rgba(226, 226, 226, 1);">
+          <div class="right_wrap">
+            <div class="bn_title">
+              <div class="title">Live well, love lots</div>
+              <div class="sub">The most extraordinary beauty in the world is the besuty in the home.
+                <br>
+                世上最不平凡的美是家裡的美
+              </div>
+            </div>
+            <div class="bn_pd">
+              <img src="./../../../public/img/pd01_500x500.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <!-- <h1>Hello, This is Home Page.</h1>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
@@ -60,74 +81,92 @@
         </div>
         </div>
     </section> -->
-  <section class="homepd">
-    <div class="homepd_wrap">
-      <div class="home_head waypoint show">
+    <section class="homepd">
+      <div class="homepd_wrap">
+        <div class="home_head waypoint show">
           <div class="subtitle">Hot Products</div>
           <h2 class="title">精選商品推薦</h2>
-          <div class="p">對於初次挑選XXX的您，我們推薦以下精選商品，<br>
-    點選您有興趣的品項，前往商品頁面一探究竟吧</div>
-      </div>
-      <div class="pd_block waypoint show">
-        <Swiper
-        :slidesPerView="3"
+          <div class="p">對於初次挑選XXX的您，我們推薦以下精選商品，<br>點選您有興趣的品項，前往商品頁面一探究竟吧</div>
+        </div>
+        <div class="pd_block waypoint show">
+          <Swiper
+            :breakpoints="{
+              '640': {
+                slidesPerView: 1,
+                // spaceBetween: 0,
+              },
+              '768': {
+                slidesPerView: 2,
+                // spaceBetween: 30,
+              },
+              '1024': {
+                slidesPerView: 4,
+                // spaceBetween: 30,
+              },
+            }"
+            :loop="true"
+            :autoplay="{
+              delay: 2500,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }"
           >
-          <swiper-slide v-for="product in products" :key="product.id">
-            <div class="pd_li">
-              <a class="pd_wrap" href="javascript:;">
-                <div class="pd_pic">
-                  <img class="swiper-lazy swiper-lazy-loaded" alt="雞胸肉" :src="product.imageUrl">
-                  <div class="pd_dec">
-                    <div class="pd_p">{{ product.description }}</div>
-                  </div>
-                  <div class="pd_btn">
-                    <div class="btn_more">
-                      <p>了解更多</p>
-                      <span class="icon-arrow"></span>
+            <swiper-slide v-for="product in products" :key="product.id">
+              <div class="pd_li">
+                <a class="pd_wrap" href="javascript:;">
+                  <div class="pd_pic">
+                    <img class="swiper-lazy swiper-lazy-loaded" :alt="product.title" :src="product.imageUrl">
+                    <div class="pd_dec">
+                      <div class="pd_p">{{ product.description }}</div>
+                    </div>
+                    <div class="pd_btn">
+                      <div class="btn_more">
+                        <p>了解更多</p>
+                        <span class="icon-arrow"></span>
+                      </div>
                     </div>
                   </div>
+                  <div class="pd_title">
+                    <div class="title">{{ product.title }}</div>
+                    <div class="tag">{{ product.category }}</div>
+                  </div>
+                </a>
+              </div>
+            </swiper-slide>
+            <!-- <div class="swiper_prev icon-arrow_left" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="false"></div>
+            <div class="swiper_next icon-arrow_right" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div> -->
+          </swiper>
+        </div>
+      </div>
+    </section>
+    <!-- <section class="home_news">
+      <div class="news_block">
+        <div class="home_title aos-init aos-animate" data-aos="fade-down" data-aos-delay="100" data-aos-duration="1000" data-aos-once="true">
+          <div class="title_head">NEWS</div>
+          <div class="title_sub">最新消息</div>
+          <p>追蹤我們的最新資訊，活動好禮不間斷!</p>
+        </div>
+        <div class="swiper-container aos-init aos-animate" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000" data-aos-once="true">
+          <div class="news_list swiper-wrapper">
+            <div class="swiper-slide">
+              <a class="news_item" href="https://www.perfectcompanion.com.tw/tw/news/charity/135">
+                <div class="news_bg">
+                  <div class="news_img"><img src="/upload/2023_09_195/20230919104539j2mymmWCJ2.png" alt="狗狗洗澡小撇步"></div>
+                  <div class="hover"><span class="icon-track"></span>
+                    <p>Find more</p>
+                  </div>
                 </div>
-                <div class="pd_title">
-                  <div class="title">{{ product.title }}</div>
-                  <div class="tag">{{ product.category }}</div>
+                <div class="news_detail">
+                  <div class="news_data">09.19</div>
+                  <div class="news_title">狗狗洗澡小撇步</div>
+                  <p></p>
                 </div>
               </a>
             </div>
-          </swiper-slide>
-          <!-- <div class="swiper_prev icon-arrow_left" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="false"></div>
-          <div class="swiper_next icon-arrow_right" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div> -->
-        </swiper>
-      </div>
-    </div>
-  </section>
-  <!-- <section class="home_news">
-    <div class="news_block">
-      <div class="home_title aos-init aos-animate" data-aos="fade-down" data-aos-delay="100" data-aos-duration="1000" data-aos-once="true">
-        <div class="title_head">NEWS</div>
-        <div class="title_sub">最新消息</div>
-        <p>追蹤我們的最新資訊，活動好禮不間斷!</p>
-      </div>
-      <div class="swiper-container aos-init aos-animate" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000" data-aos-once="true">
-        <div class="news_list swiper-wrapper">
-          <div class="swiper-slide">
-            <a class="news_item" href="https://www.perfectcompanion.com.tw/tw/news/charity/135">
-              <div class="news_bg">
-                <div class="news_img"><img src="/upload/2023_09_195/20230919104539j2mymmWCJ2.png" alt="狗狗洗澡小撇步"></div>
-                <div class="hover"><span class="icon-track"></span>
-                  <p>Find more</p>
-                </div>
-              </div>
-              <div class="news_detail">
-                <div class="news_data">09.19</div>
-                <div class="news_title">狗狗洗澡小撇步</div>
-                <p></p>
-              </div>
-            </a>
           </div>
         </div>
       </div>
-    </div>
-  </section> -->
+    </section> -->
   </div>
 </template>
 
@@ -156,6 +195,17 @@ export default {
         })
     },
     productSwiper () {
+      // this.mySwiper = new Swiper('.homepd .swiper', {
+      //   slidesPerView: 3,
+      //   breakpoints: {
+      //     768: {
+      //       slidesPerView: 1
+      //     },
+      //     1024: {
+      //       slidesPerView: 2
+      //     }
+      //   }
+      // })
       // ('.homepd .swiper-container', {
       //   slidesPerView: 1,
       //   slidesPerGroup: 1,

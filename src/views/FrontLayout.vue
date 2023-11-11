@@ -5,16 +5,16 @@
   <router-link to="/products">產品頁面</router-link> |
   <router-link to="/cart">購物車</router-link> |
   <router-link to="/admin">後台</router-link>
-  <hr>
+  <!-- <hr> -->
   <RouterView></RouterView>
 </template>
 
 <script>
-import { RouterView } from 'vue-router'
+// import { RouterView } from 'vue-router'
 
 export default {
-  components: {
-    RouterView
-  }
+  // components: {
+  //   RouterView
+  // }
 }
 </script>
