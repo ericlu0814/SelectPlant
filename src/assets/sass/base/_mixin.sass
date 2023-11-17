@@ -1,0 +1,129 @@
+//字體宣告
+$JhengHei: "微軟正黑體修正", "Microsoft JhengHei", "微軟正黑體", sans-serif
+$JhengHeiBold: "微軟正黑體修正", "Microsoft-JhengHei-Bold", sans-serif
+  
+//RWD
+@mixin rwdmax($max)
+	@media only screen and (max-width: $max + px)  
+		@content
+
+@mixin rwdmin($min)
+	@media only screen and (min-width: $min + px)  
+		@content
+
+//文字大小像素轉rem
+@mixin font-size($size: 16) 
+	font-size: ($size/16) + rem
+
+@function px($px)
+	@return calc($px / 16 * 1rem)
+
+//文字大小像素轉vw/vh
+@function pxTovw($px)
+	@return $px / 1920 * 100vw
+
+@function pxTovh($px)
+	@return $px / 1080 * 100vh
+
+//背景圖
+@mixin bg($url,$size,$repeat,$pos)
+	background-image: url($url)
+	background-size: $size
+	background-repeat: $repeat
+	background-position: $pos
+
+//文字設定
+=fontSet($font: $JhengHei, $fw: normal, $size: px(16), $lh: 1, $color: inherit, $ls: normal)
+	font-family: $font
+	font-weight: $fw
+	font-size: $size
+	line-height: $lh
+	color: $color
+	letter-spacing: $ls
+
+//flex
+=flex($display: flex, $wrap: nowrap, $direction: row, $jc: center, $ai: center)
+	display: $display
+	flex-wrap: $wrap
+	flex-direction: $direction
+	justify-content: $jc
+	align-items: $ai
+
+// absolute-center
+=posCenter
+	position: absolute
+	top: 50%
+	left: 50%
+	transform: translate(-50%,-50%)
+
+=posFill($w: 100%, $h: 100%)
+	position: absolute
+	top: 0
+	left: 0
+	width: $w
+	height: $h
+
+// 偽元素基本
+=pseudo($position: absolute, $display: block, $content: "")
+	position: absolute
+	display: block
+	content: $content
+
+// 文字溢出加省略號 ...
+=ellipsis($line: 2, $lh: 32px, $height: $line * $lh)
+	display: block
+	overflow: hidden
+	display: -webkit-box
+	-webkit-box-orient: vertical
+	-webkit-line-clamp: $line
+	line-height: $lh
+	max-height: $line * $lh
+	height: $height
+
+//placeholder
+=placeholder($font: $basic, $color: black, $size: px(16))
+	&::placeholder
+		font-family: $font
+		font-size: $size
+		color: $color
+		opacity: 1
+		overflow: visible
+		@if $ls != ''
+			letter-spacing: $ls
+
+// IE
+=ieHack
+	@media screen and (-ms-high-contrast: active),(-ms-high-contrast: none)
+		@content
+
+=gradient-text($color: $gradient-01)
+	background: $color
+	background-clip: text
+	color: transparent
+
+=circle($px)
+	width: $px + px
+	height: $px + px
+	border-radius: 50%
+
+=allflex
+	display: flex
+	align-items: center
+	justify-content: center
+
+=ellip($line: 2)
+	display: block
+	overflow: hidden
+	display: -webkit-box
+	-webkit-box-orient: vertical
+	-webkit-line-clamp: $line
+
+=imgfix
+	z-index: -1
+	position: absolute
+	top: 0
+	left: 0
+	width: 100%
+	height: 100%
+	object-fit: cover
+	object-position: center

@@ -4,44 +4,54 @@
 @import ./base/_font
 //變數
 
-@import 'bootstrap/scss/functions'
-@import './base/_variables.scss'
-@import 'bootstrap/scss/bootstrap'
+//mixin
+@import ./base/_mixin
+//icon
+@import /font/style.css
 
-*
-    font-family: "Philosopher", "Noto Sans TC", "微軟正黑體修正", "Microsoft JhengHei", "微軟正黑體", sans-serif
+// @import 'bootstrap/scss/functions'
+// @import './base/_variables.scss'
+// @import 'bootstrap/scss/bootstrap'
+
+@import './base/_footer'
+@import './base/_header'
+
+body
+    font-weight: normal
+    font-family: "Ubuntu", "Noto Sans TC", "微軟正黑體修正", "Microsoft JhengHei", "微軟正黑體", sans-serif
+    font-size: px(14)
+
+.cont
+    min-height: 50vh
+    margin-top: 100px
+
+.home
+    margin-top: -100px
 
 .home_head
-    color: #1a520f
+    color: #51504c
 
 .home_head .subtitle
-    font-size: 3.75rem
+    font-size: px(36)
+    font-family: $JhengHei
+    font-weight: 700
     // font-family: "Philosopher", "微軟正黑體修正", "Microsoft JhengHei", "微軟正黑體", sans-serif
-    letter-spacing: 2.65px
+    letter-spacing: 1px
     line-height: 1.2
-
-@media only screen and (max-width: 1200px)
-    .home_head .subtitle
-        font-size: 3.125rem
-
-@media only screen and (max-width: 575px)
-    .home_head .subtitle
-        font-size: 2.25rem
+    +rwdmax(1200)
+        font-size: px(30)
+    +rwdmax(575)
+        font-size: px(24)
 
 .home_head .title
-    font-size: 1.5rem
-    // font-family: "CenturyGothic-Bold", "微軟正黑體修正", "Microsoft JhengHei Bold", "Microsoft JhengHei", sans-serif
+    font-size: px(20)
     font-weight: bold
     padding-top: 10px
-    letter-spacing: 1.23px
     line-height: 1.3
-
-@media only screen and (max-width: 575px)
-    .home_head .title
-        font-size: 1.375rem
+    +rwdmax(575)
+        font-size: px(18)
 
 .home_head .p
-    letter-spacing: 0.46px
     line-height: 1.8
     padding-top: 15px
     letter-spacing: 0.46px
@@ -57,15 +67,8 @@
 
 .homepd
     background: #ece9e9
-    padding-top: 140px
-
-@media only screen and (max-width: 1200px)
-    .homepd
-        padding-top: 100px
-
-@media only screen and (max-width: 575px)
-.homepd
-    padding-top: 60px
+    padding-top: 100px
+    padding-bottom: 100px
 
 .homepd .homepd_wrap
     max-width: 1600px
@@ -704,14 +707,40 @@
         margin-top: 50px
 
 .bn_title
-    font-weight: bold
+    // font-weight: bold
     .title
+        font-family: $JhengHei
+        font-weight: 700
         letter-spacing: 2px
         font-size: 44px
         color: rgb(82, 72, 63)
     .sub
         letter-spacing: 1px
-        margin-top: 10px
-        max-width: 350px
+        margin-top: 15px
+        max-width: 400px
         line-height: 1.8
         font-size: 14px
+
+
+.products
+    max-width: 800px
+    width: 90%
+    margin: 0 auto
+    margin-top: 50px
+    tr
+        display: flex
+        align-items: center
+        padding: 10px 0
+        &:not(:first-child)
+            border-top: 1px solid #ccc
+    td
+        &:nth-child(1)
+            flex: 1% 1 0
+        &:nth-child(2)
+            flex: 1% 1 0
+        &:nth-child(3)
+            flex: 2% 2 0
+            text-align: right
+        
+    img
+        max-width: 200px

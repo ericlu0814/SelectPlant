@@ -1,7 +1,7 @@
 <template>
   這是單一產品列表
   <RouterLink to="/products">返回產品列表頁</RouterLink>
-  <table class="table align-middle">
+  <table class="table align-middle products">
     <thead>
       <tr>
         <th>圖片</th>

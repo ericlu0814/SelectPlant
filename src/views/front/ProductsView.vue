@@ -1,6 +1,6 @@
 <template>
   這是產品列表
-  <table>
+  <table class="products">
     <tbody>
       <tr v-for="product in products" :key="product.id">
         <td>{{ product.title }}</td>

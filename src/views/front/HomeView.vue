@@ -4,7 +4,7 @@
     <section class="homebanner">
       <div class="bn_wrap">
         <div class="bn_left">
-          <div class="bn_bg" style="background-image: url('./../../../public/img/bn01_1000x1000.jpg');"></div>
+          <div class="bn_bg" style="background-image: url('/img/bn01_1000x1000.jpg');"></div>
         </div>
         <div class="bn_right" style="background-color: rgba(226, 226, 226, 1);">
           <div class="right_wrap">
@@ -16,7 +16,7 @@
               </div>
             </div>
             <div class="bn_pd">
-              <img src="./../../../public/img/pd01_500x500.png" alt="">
+              <img src="/img/pd01_500x500.png" alt="">
             </div>
           </div>
         </div>
