@@ -2,25 +2,48 @@
   <div class="home">
     <!-- 這是首頁 -->
     <section class="homebanner">
-      <div class="bn_wrap">
-        <div class="bn_left">
-          <div class="bn_bg" style="background-image: url('/img/bn01_1000x1000.jpg');"></div>
-        </div>
-        <div class="bn_right" style="background-color: rgba(226, 226, 226, 1);">
-          <div class="right_wrap">
-            <div class="bn_title">
-              <div class="title">Live well, love lots</div>
-              <div class="sub">The most extraordinary beauty in the world is the besuty in the home.
-                <br>
-                世上最不平凡的美是家裡的美
+      <Swiper
+        :modules="modules" effect="fade"
+        :loop="true"
+        :speed="800"
+        :autoplay="{
+          delay: 5000
+        }"
+        :pagination="{
+          el: '.homebanner .swiper-pagination',
+          type: 'fraction',
+        }"
+        ref="bannerSwiper">
+        <swiper-slide v-for="bannerSlide in bannerSlides" :key="bannerSlide.id" >
+          <div class="bn_wrap">
+            <div class="bn_left">
+              <div class="bn_bg" :style="{ backgroundImage: `url(${bannerSlide.bgUrl})` }"></div>
+            </div>
+            <div class="bn_right" :style="{ backgroundColor: bannerSlide.productBg }">
+              <div class="right_wrap">
+                <div class="home_title" :class="{ 'white' : bannerSlide.wordColor == 'white' }">
+                  <div class="title">{{ bannerSlide.title }}</div>
+                  <div class="sub">{{ bannerSlide.sub }}</div>
+                </div>
+                <div class="bn_pd">
+                  <img :src="bannerSlide.productUrl" alt="">
+                </div>
               </div>
             </div>
-            <div class="bn_pd">
-              <img src="/img/pd01_500x500.png" alt="">
-            </div>
           </div>
+        </swiper-slide>
+      </Swiper>
+      <div class="pagination">
+        <div class="wrap">
+          <div class="swiper-pagination"></div>
+          <!-- <div class="swiper-pagination-current"></div>
+          <div class="line"></div>
+          <div class="swiper-pagination-total"></div> -->
         </div>
       </div>
+      <a href="javascript:;" class="btn_goDown">
+        <span class="icon-arrow_down"></span>
+      </a>
     </section>
     <!-- <h1>Hello, This is Home Page.</h1>
     <router-link to="/">Home</router-link> |
@@ -113,7 +136,7 @@
           >
             <swiper-slide v-for="product in products" :key="product.id">
               <div class="pd_li">
-                <a class="pd_wrap" href="javascript:;">
+                <RouterLink :to="`/product/${product.id}`" class="pd_wrap">
                   <div class="pd_pic">
                     <img class="swiper-lazy swiper-lazy-loaded" :alt="product.title" :src="product.imageUrl">
                     <div class="pd_dec">
@@ -122,7 +145,7 @@
                     <div class="pd_btn">
                       <div class="btn_more">
                         <p>了解更多</p>
-                        <span class="icon-arrow"></span>
+                        <span class="icon-arrow_right"></span>
                       </div>
                     </div>
                   </div>
@@ -130,7 +153,7 @@
                     <div class="title">{{ product.title }}</div>
                     <div class="tag">{{ product.category }}</div>
                   </div>
-                </a>
+                </RouterLink>
               </div>
             </swiper-slide>
             <!-- <div class="swiper_prev icon-arrow_left" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="false"></div>
@@ -172,13 +195,22 @@
 
 <script>
 // import HelloWorld from '@/components/HelloWorld.vue'
+import { EffectFade, Autoplay, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
+import 'swiper/css/effect-fade'
+import 'swiper/css/autoplay'
+import 'swiper/css/pagination'
+import { HomeData } from '@/data/home.js'
+import '@/assets/sass/page/home.sass'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
+
 export default {
   data () {
     return {
-      products: []
+      bannerSlides: HomeData.banner,
+      products: [],
+      modules: [EffectFade, Autoplay, Pagination]
     }
   },
   components: {
@@ -191,62 +223,36 @@ export default {
       this.$http.get(url)
         .then(res => {
           this.products = res.data.products
-          console.log('商品列表:', res.data.products)
+          // console.log('商品列表:', res.data.products)
         })
     },
     productSwiper () {
-      // this.mySwiper = new Swiper('.homepd .swiper', {
-      //   slidesPerView: 3,
-      //   breakpoints: {
-      //     768: {
-      //       slidesPerView: 1
-      //     },
-      //     1024: {
-      //       slidesPerView: 2
-      //     }
-      //   }
-      // })
-      // ('.homepd .swiper-container', {
-      //   slidesPerView: 1,
-      //   slidesPerGroup: 1,
-      //   autoplay: {
-      //     delay: 5e3
-      //   },
-      //   speed: 1e3,
-      //   navigation: {
-      //     nextEl: '.homepd .swiper_next',
-      //     prevEl: '.homepd .swiper_prev'
-      //   },
-      //   preloadImages: !1,
-      //   lazy: {
-      //     loadPrevNext: !0
-      //   },
-      //   breakpoints: {
-      //     1200: {
-      //       slidesPerView: 4
-      //     },
-      //     992: {
-      //       slidesPerView: 3
-      //     },
-      //     575: {
-      //       slidesPerView: 2
-      //     }
-      //   },
-      //   on: {
-      //     init: function () {
-      //       // _common.getSlidesCount(this, "0")
-      //     }
-      //   }
-      // })
-      const onSwiper = (swiper) => {
-        console.log(swiper)
+      const $swiperoptions = {
+        el: '.homebanner .swiper-pagination',
+        type: 'fraction',
+        renderFraction: function (currentClass, totalClass) {
+          return '<span class="' + currentClass + '"></span>' +
+            '<div class="line"></div>' +
+            '<span class="' + totalClass + '"></span>'
+        }
       }
-      const onSlideChange = () => {
-        console.log('slide change')
+      const $swiperLine = document.querySelectorAll('.homebanner .line')
+      const init = () => {
+        $swiperLine.addClass('on')
+      }
+      const slideChangeTransitionStart = () => {
+        $swiperLine.removeClass('on')
+      }
+      const slideChangeTransitionEnd = () => {
+        $swiperLine.addClass('on')
       }
       return {
-        onSwiper,
-        onSlideChange
+        // onSwiper,
+        // onSlideChange
+        $swiperoptions,
+        init,
+        slideChangeTransitionStart,
+        slideChangeTransitionEnd
       }
     }
   },

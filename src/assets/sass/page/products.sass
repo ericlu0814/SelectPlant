@@ -1,0 +1,53 @@
+//變數
+@import @/assets/sass/base/_mixin
+
+.productBn
+    position: relative
+    min-height: 500px
+    .bn_bg
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        background-repeat: no-repeat
+        background-position: center
+        background-color: #87888c
+        background-position-y: top
+        &::after
+            position: absolute
+            content: ''
+            background-color: rgba(0, 0, 0, .1)
+            width: 100%
+            height: 100%
+            z-index: 1
+            // backdrop-filter: blur(3px)
+    .bn_head
+        position: absolute
+        top: 60%
+        left: 50%
+        transform: translate(-50%,-50%)
+        max-width: 1500px
+        width: 85%
+        margin: 0 auto
+        z-index: 3
+
+.unit_title
+    max-width: 600px
+    width: 100%
+    margin: 0 auto
+    text-align: center
+    color: #fff
+    .title
+        font-family: $JhengHei
+        font-weight: 700
+        letter-spacing: 2px
+        font-size: px(44)
+        line-height: 1.3
+    .sub
+        margin-top: 15px
+        font-size: px(24)
+
+.productCt
+    width: 100%
+    background: rgba(#51504c, .1)
