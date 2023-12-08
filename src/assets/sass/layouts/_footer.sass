@@ -21,10 +21,17 @@ footer
     margin-top: 30px
     display: flex
     justify-content: center
+    +rwdmax(1200)
+      flex-direction: column
     > div
       padding: 0 15px
-      &:not(:first-child)
-        border-left: 1px solid rgba(255, 255, 255, .3)
+      +rwdmax(1200)
+        width: 100%
+        margin-top: 20px
+        text-align: center
+      +rwdmin(1201)
+        &:not(:first-child)
+          border-left: 1px solid rgba(255, 255, 255, .3)
   .ft_icon
     a
       font-size: px(18)
@@ -38,6 +45,8 @@ footer
   .ft_logo
     max-width: 200px
     margin: 30px auto 0
+    +rwdmax(767)
+      max-width: 150px
   .ft_copyright
     margin-top: 30px
     text-align: center

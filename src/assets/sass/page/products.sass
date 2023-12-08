@@ -1,5 +1,7 @@
 //變數
 @import @/assets/sass/base/_mixin
+//變數
+@import @/assets/sass/base/_variable
 
 .productBn
     position: relative
@@ -49,5 +51,41 @@
         font-size: px(24)
 
 .productCt
+    padding-top: 100px
+    padding-bottom: 100px
     width: 100%
     background: rgba(#51504c, .1)
+    .ct_wrap
+        max-width: 1300px
+        width: 85%
+        margin: 0 auto
+        display: flex
+        flex-wrap: wrap
+
+    .pd
+        width: 25%
+        margin-top: 50px
+        +rwdmax(1200)
+            width: 33.3%
+        +rwdmax(992)
+            width: 50%
+        +rwdmax(767)
+            width: 100%
+    .pd_wrap
+        max-width: 280px
+        width: 90%
+        margin: 0 auto
+    .pd_head
+        margin-top: 15px
+        text-align: center
+    .pd_title
+        font-size: px(16)
+    .pd_price
+        margin-top: 5px
+        font-size: px(18)
+        font-family: $noto
+        font-weight: bold
+        color: $mainColor
+    .pd_btn
+        margin-top: 10px
+
