@@ -1,44 +1,77 @@
 <template>
   <div>
     <section class="productDtBn">
-      <div class="bn_back">
-        <RouterLink to="/products">返回產品列表頁</RouterLink>
-      </div>
       <div class="bn_wrap">
         <div class="bn_left">
           <!-- :autoplay="{
               delay: 5000
             } " -->
-          <Swiper class="bn_mainPic"
-            :modules="modules" effect="fade"
-            :speed="800"
-            :spaceBetween="5"
-            :navigation="true"
-            :thumbs="{ swiper: thumbsSwiper }"
-            ref="bannerSwiper">
-            <swiper-slide v-for="(img, i) in product.imagesUrl" :key="img + i">
-              <img :src="product.imagesUrl[i]" :alt="product.title+i">
-            </swiper-slide>
-          </Swiper>
-          <Swiper class="bn_subPic"
-            @swiper="setThumbsSwiper"
-            :spaceBetween="5"
-            :slidesPerView="4"
-            :freeMode="true"
-            :watchSlidesProgress="true"
-            :speed="800"
-            :autoplay="{
-              delay: 5000
-            }"
-            :modules="modules"
-            ref="bannerSwiper0">
-            <swiper-slide v-for="(img, i) in product.imagesUrl" :key="img + i">
-              <img :src="product.imagesUrl[i]" :alt="product.title+i">
-            </swiper-slide>
-          </Swiper>
+          <div class="pd_onePic" v-if="product.imagesUrl == null">
+            <img :src="product.imageUrl" alt="" v>
+          </div>
+          <div v-else>
+            <Swiper class="pd_mainPic"
+              :modules="modules" effect="fade"
+              :speed="800"
+              :spaceBetween="5"
+              :navigation="{
+                nextEl: '.pd_mainPic .swiper-next',
+                prevEl: '.pd_mainPic .swiper-prev'
+              }"
+              :thumbs="{ swiper: thumbsSwiper }"
+              ref="bannerSwiper">
+              <swiper-slide v-for="(img, i) in product.imagesUrl" :key="img + i">
+                <img :src="product.imagesUrl[i]" :alt="product.title+i">
+              </swiper-slide>
+            </Swiper>
+            <div class="swiper_btn">
+              <div class="swiper-prev icon-arrow_top"></div>
+              <div class="swiper-next icon-arrow_down"></div>
+            </div>
+            <Swiper class="pd_subPic"
+              @swiper="setThumbsSwiper"
+              :spaceBetween="5"
+              :slidesPerView="5"
+              :freeMode="true"
+              :watchSlidesProgress="true"
+              :speed="800"
+              :modules="modules"
+              ref="bannerSwiper0">
+              <swiper-slide v-for="(img, i) in product.imagesUrl" :key="img + i">
+                <img :src="product.imagesUrl[i]" :alt="product.title+i">
+              </swiper-slide>
+            </Swiper>
+          </div>
         </div>
-        <div class="bn_right"></div>
+        <div class="bn_right">
+          <div class="right_wrqp">
+            <div class="bn_nav">
+              <RouterLink to="/products">商品專區</RouterLink> /
+              {{ product.category }}
+            </div>
+            <div class="bn_head">
+              <div class="pd_title">
+                <div class="pd_tag">{{ product.category }}</div>
+                <div class="pd_name">{{ product.title }}</div>
+              </div>
+              <div class="pd_price">
+                售價
+                <span>
+                  NT$ {{ product.price }}
+                </span>
+              </div>
+              <div class="pd_des">
+                {{ product.description }}
+              </div>
+              <div class="pd_ct">
+                {{ product.content }}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
+    <section class="productDtRelate">
     </section>
     <table class="table align-middle products">
       <thead>
@@ -96,7 +129,7 @@ import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
 
-import '@/assets/sass/page/product_detail.sass'
+import '@/assets/sass/page/product.sass'
 import { RouterLink } from 'vue-router'
 
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env

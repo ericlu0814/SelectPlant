@@ -1,5 +1,77 @@
 //變數
 @import @/assets/sass/base/_mixin
+//變數
+@import @/assets/sass/base/_variable
 
-
-    
+.productDtBn
+    min-height: 200px
+    padding-top: 150px
+    padding-bottom: 60px
+    background-color: rgba($mainColor, .1)
+    .bn_wrap
+        max-width: 1200px
+        width: 85%
+        margin: 0 auto
+        display: flex
+    .bn_left
+        max-width: 665px
+        width: 55%
+        margin: 0 auto
+    .pd_onePic
+        max-width: 600px
+        width: 90%
+        margin: 0 auto
+    .pd_mainPic
+        // box-shadow: 0px 2px 4px 3px rgba(0, 0, 0, .2)
+        max-width: 600px
+        width: 90%
+        margin: 0 auto
+        // border: 5px solid rgba($mainColor, .1)
+    .pd_subPic
+        max-width: 600px
+        width: 90%
+        margin: 0 auto
+    .swiper-slide-thumb-active
+        img
+            filter: saturate(0.5)
+            border: 1px solid $mainColor
+    .bn_right
+        max-width: 565px
+        width: 45%
+        margin: 0 auto
+    .right_wrqp
+        max-width: 500px
+        width: 90%
+        margin: 0 auto
+    .pd_title
+        margin-top: 20px
+        display: flex
+        align-items: center
+    .pd_tag
+        padding: 10px 10px
+        background: $mainColor
+        color: #fff
+        border-radius: 20px
+    .pd_name
+        margin-left: 10px
+        font-size: px(26)
+        font-weight: bold
+    .pd_price
+        margin-top: 15px
+        display: flex
+        align-items: center
+        span
+            margin-left: 10px
+            font-size: px(22)
+            font-family: $noto
+            font-weight: bold
+    .pd_des
+        margin-top: 20px
+        line-height: 1.5
+    .pd_ct
+        margin-top: 30px
+        padding-top: 10px
+        border-top: 1px dashed #333
+        line-height: 1.6
+        letter-spacing: 0.5px
+        white-space: pre-wrap
