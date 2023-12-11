@@ -6,8 +6,10 @@
           <!-- :autoplay="{
               delay: 5000
             } " -->
-          <div class="pd_onePic" v-if="product.imagesUrl == null">
-            <img :src="product.imageUrl" alt="" v>
+          <!-- length{{ product?.imagesUrl?.length === 1 }}
+          array{{ Array.isArray(product?.imagesUrl) }} -->
+          <div class="pd_onePic" v-if="!Array.isArray(product.imagesUrl)">
+            <img :src="product.imageUrl" :alt="product.title">
           </div>
           <div v-else>
             <Swiper class="pd_mainPic"
@@ -73,7 +75,7 @@
     </section>
     <section class="productDtRelate">
     </section>
-    <table class="table align-middle products">
+    <table class="table align-middle products" style="display:none;">
       <thead>
         <tr>
           <th>圖片</th>

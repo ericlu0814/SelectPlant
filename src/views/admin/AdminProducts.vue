@@ -75,8 +75,6 @@
                 </div>
                 <div>
                   <h4>多圖設置</h4>
-                  {{ Array.isArray(tempProduct.imagesUrl) }}
-                  {{ tempProduct.imagesUrl }}
                   <div v-if="Array.isArray(tempProduct.imagesUrl)">
                     <template v-for="(img, key) in tempProduct?.imagesUrl" :key="key + 123">
                       <input type="text" class="form-control"
@@ -86,24 +84,6 @@
                     <button class="btn btn-outline-primary btn-sm d-block w-100 mb-1"
                       v-if="!tempProduct.imagesUrl.length ||
                       tempProduct.imagesUrl[tempProduct.imagesUrl.length - 1]"
-                      @click="tempProduct.imagesUrl.push('')">
-                      新增圖片
-                    </button>
-                    <button class="btn btn-outline-danger btn-sm d-block w-100"
-                      v-else @click="tempProduct.imagesUrl.pop('')">
-                      刪除圖片
-                    </button>
-                  </div>
-                  <div v-else>
-                    <template v-for="(img, key) in tempProduct?.imagesUrl" :key="key + 123">
-                      <input type="text" class="form-control"
-                            placeholder="請輸入圖片連結" v-model="tempProduct.imagesUrl[key]">
-                      <img class="img-fluid mb-2" :src="tempProduct.imagesUrl[key]" alt="">
-                    </template>
-                    <!-- v-if="!tempProduct.imagesUrl.length ||
-                      tempProduct.imagesUrl[tempProduct.imagesUrl.length - 1]" -->
-                    <button class="btn btn-outline-primary btn-sm d-block w-100 mb-1"
-                      v-if="tempProduct.imagesUrl.length == 0"
                       @click="tempProduct.imagesUrl.push('')">
                       新增圖片
                     </button>
@@ -244,9 +224,13 @@ export default {
     },
     openModal (status, data) {
       // productModal.show()
-      // console.log(status);
+      console.log(status)
       if (status === 'edit') {
-        this.tempProduct = { ...data }
+        const Data = { ...data }
+        if (!('imagesUrl' in Data)) {
+          Data.imagesUrl = []
+        }
+        this.tempProduct = Data
         this.isNew = 'false'
         productModal.show()
       } else if (status === 'create') {
