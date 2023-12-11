@@ -6,7 +6,7 @@
 .productDtBn
     min-height: 200px
     padding-top: 150px
-    padding-bottom: 60px
+    padding-bottom: 100px
     background-color: rgba($mainColor, .1)
     .bn_wrap
         max-width: 1200px
@@ -70,12 +70,102 @@
             font-family: $noto
             font-weight: bold
     .pd_des
-        margin-top: 20px
-        line-height: 1.5
-    .pd_ct
         margin-top: 30px
-        padding-top: 10px
+        padding-top: 20px
         border-top: 1px dashed #333
+        line-height: 1.8
+    // .pd_ct
+    //     margin-top: 30px
+    //     line-height: 1.6
+    //     letter-spacing: 0.5px
+    //     white-space: pre-wrap
+    .pd_qty
+        margin-top: 30px
+        padding: 30px 5%
+        background-color: rgba($mainColor, .3)
+        p
+            font-size: px(16)
+            font-weight: bold
+        .btn_pdQty
+            margin-top: 10px
+
+.sub_head
+    text-align: center
+    .sub
+        font-size: px(30)
+    .title
+        margin-top: 10px
+        font-size: px(20)
+
+.productDtContent
+    // background: #ccc
+    .content_wrap
+        max-width: 800px
+        width: 85%
+        margin: 0 auto
+        padding: 100px 0
+    .content_ct
+        margin-top: 30px
         line-height: 1.6
         letter-spacing: 0.5px
         white-space: pre-wrap
+
+.productDtRelate
+    background: #ccc
+    .relate_wrap
+        max-width: 1200px
+        width: 85%
+        margin: 0 auto
+        padding: 100px 0
+    
+
+.btn_pdQty
+    padding: 10px 20px
+    background: rgba(#fff, .8)
+    display: flex
+    align-items: center
+    border-radius: 30px
+    span
+        flex: 1% 1 0
+        text-align: center
+        margin: 0 20px
+        font-size: px(18)
+    .num_plus,.num_minus
+        font-size: px(24)
+    .num_plus
+        position: relative
+        width: 30px
+        height: 30px
+        display: flex
+        align-items: center
+        justify-content: center
+        cursor: pointer
+        &:before
+            position: absolute
+            display: block
+            content: ''
+            width: 16px
+            height: 2px
+            background: #000
+        &::after
+            position: absolute
+            display: block
+            content: ''
+            width: 2px
+            height: 16px
+            background: #000
+    .num_minus
+        position: relative
+        width: 30px
+        height: 30px
+        display: flex
+        align-items: center
+        justify-content: center
+        cursor: pointer
+        &:before
+            position: absolute
+            display: block
+            content: ''
+            width: 16px
+            height: 2px
+            background: #000

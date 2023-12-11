@@ -65,15 +65,37 @@
               <div class="pd_des">
                 {{ product.description }}
               </div>
-              <div class="pd_ct">
-                {{ product.content }}
+              <div class="pd_qty">
+                <p>選購數量</p>
+                <div class="btn_pdQty">
+                  <div class="num_plus"></div>
+                  <span>0</span>
+                  <div class="num_minus"></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
+    <section class="productDtContent">
+      <div class="content_wrap">
+        <div class="sub_head">
+          <div class="sub">About Product</div>
+          <div class="title">商品描述</div>
+        </div>
+        <div class="content_ct">{{ product.content }}</div>
+      </div>
+
+    </section>
     <section class="productDtRelate">
+      <div class="relate_wrap">
+        <div class="sub_head">
+          <div class="sub">Related products</div>
+          <div class="title">相關商品</div>
+        </div>
+      </div>
+
     </section>
     <table class="table align-middle products" style="display:none;">
       <thead>
@@ -138,6 +160,7 @@ const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data () {
     return {
+      products: [],
       product: [],
       modules: [EffectFade, Autoplay, Pagination, FreeMode, Navigation, Thumbs],
       thumbsSwiper: ''
@@ -155,8 +178,20 @@ export default {
       this.$http.get(url)
         .then(res => {
           this.product = res.data.product
-          console.log('商品列表:', res.data.product)
+          this.getProducts()
+          console.log('商品內頁:', res.data.product)
         })
+    },
+    getProducts () {
+      const url = `${VITE_APP_URL}api/${VITE_APP_PATH}/products`
+      this.$http.get(url)
+        .then(res => {
+          this.products = res.data.products
+          console.log('商品列表:', res.data.products)
+        })
+    },
+    findProductIndex () {
+      // this.products
     },
     setThumbsSwiper (swiper) {
       this.thumbsSwiper = swiper
