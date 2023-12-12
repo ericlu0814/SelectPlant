@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="productBn">
+    <section class="productBanner">
       <!-- style="background-image: url('/img/bn01_1000x1000.jpg');" pdbn_1920x500 -->
       <div class="bn_bg" style="background-image: url('/img/123.jpg');"></div>
       <div class="bn_head">
@@ -41,9 +41,11 @@
               </div>
               <div class="pd_right">
                 <div class="pd_name">{{ cart.product.title }}</div>
-                <div class="pd_num"></div>
+                <div class="pd_num">{{ cart.qty }} 棵</div>
                 <div class="pd_price">{{ cart.product.price }}</div>
-                <div class="pd_remove"></div>
+                <div class="pd_remove">
+                  <div class="btn_common" @click="removeProduct(cart)">刪除</div>
+                </div>
               </div>
             </div>
           </div>
@@ -83,6 +85,16 @@ export default {
         .then(res => {
           this.carts = res.data.data.carts
           console.log('購物車列表:', res.data.data.carts)
+        })
+    },
+    removeProduct (cart) {
+      const url = `${VITE_APP_URL}api/${VITE_APP_PATH}/cart/${cart.product.id}`
+      console.log(cart.product.id)
+      this.$http.delete(url)
+        .then(res => {
+          console.log(res)
+          this.getCarts()
+          // console.log('購物車列表:', res.data.data.carts)
         })
     }
   },

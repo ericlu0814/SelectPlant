@@ -6,43 +6,51 @@
           <!-- :autoplay="{
               delay: 5000
             } " -->
-          <!-- length{{ product?.imagesUrl?.length === 1 }}
-          array{{ Array.isArray(product?.imagesUrl) }} -->
           <div class="pd_onePic" v-if="!Array.isArray(product.imagesUrl)">
             <img :src="product.imageUrl" :alt="product.title">
           </div>
-          <div v-else>
-            <Swiper class="pd_mainPic"
-              :modules="modules" effect="fade"
-              :speed="800"
-              :spaceBetween="5"
-              :navigation="{
-                nextEl: '.pd_mainPic .swiper-next',
-                prevEl: '.pd_mainPic .swiper-prev'
-              }"
-              :thumbs="{ swiper: thumbsSwiper }"
-              ref="bannerSwiper">
-              <swiper-slide v-for="(img, i) in product.imagesUrl" :key="img + i">
-                <img :src="product.imagesUrl[i]" :alt="product.title+i">
-              </swiper-slide>
-            </Swiper>
+          <div class="pd_morePic" v-else>
+            <div class="pd_mainPic">
+              <Swiper
+                :modules="modules" effect="fade"
+                :speed="800"
+                :spaceBetween="0"
+                :navigation="{
+                  nextEl: '.swiper-next',
+                  prevEl: '.swiper-prev'
+                }"
+                :thumbs="{ swiper: thumbsSwiper }"
+                ref="bannerSwiper">
+                <swiper-slide v-for="(img, i) in product.imagesUrl" :key="img + i">
+                  <img :src="product.imagesUrl[i]" :alt="product.title+i">
+                </swiper-slide>
+              </Swiper>
+            </div>
+            <div class="pd_subPic">
+              <Swiper
+                @swiper="setThumbsSwiper"
+                :spaceBetween="5"
+                :slidesPerView="4"
+                :freeMode="true"
+                :watchSlidesProgress="true"
+                :speed="800"
+                :modules="modules"
+                :breakpoints="{
+                  '768': {
+                    slidesPerView: 5,
+                  },
+                }"
+                ref="bannerSwiper0">
+                <swiper-slide v-for="(img, i) in product.imagesUrl" :key="img + i">
+                  <img :src="product.imagesUrl[i]" :alt="product.title+i">
+                </swiper-slide>
+              </Swiper>
+            </div>
             <div class="swiper_btn">
               <div class="swiper-prev icon-arrow_top"></div>
+              <span class="line"></span>
               <div class="swiper-next icon-arrow_down"></div>
             </div>
-            <Swiper class="pd_subPic"
-              @swiper="setThumbsSwiper"
-              :spaceBetween="5"
-              :slidesPerView="5"
-              :freeMode="true"
-              :watchSlidesProgress="true"
-              :speed="800"
-              :modules="modules"
-              ref="bannerSwiper0">
-              <swiper-slide v-for="(img, i) in product.imagesUrl" :key="img + i">
-                <img :src="product.imagesUrl[i]" :alt="product.title+i">
-              </swiper-slide>
-            </Swiper>
           </div>
         </div>
         <div class="bn_right">
@@ -65,12 +73,16 @@
               <div class="pd_des">
                 {{ product.description }}
               </div>
-              <div class="pd_qty">
+              <div class="pd_select">
                 <p>選購數量</p>
                 <div class="btn_pdQty">
-                  <div class="num_plus"></div>
-                  <span>0</span>
-                  <div class="num_minus"></div>
+                  <div class="num_plus" @click="qtyPlus"></div>
+                  <span>{{ productQty }}</span>
+                  <div class="num_minus disable" @click="qtyMinus" ref="minus"></div>
+                </div>
+                <div class="pd_btn">
+                  <div class="btn_common" @click="addCart">加入購物車</div>
+                  <div class="icon-line"></div>
                 </div>
               </div>
             </div>
@@ -162,8 +174,11 @@ export default {
     return {
       products: [],
       product: [],
+      ProductIndex: '',
       modules: [EffectFade, Autoplay, Pagination, FreeMode, Navigation, Thumbs],
-      thumbsSwiper: ''
+      thumbsSwiper: '',
+      productQty: 1,
+      carts: []
     }
   },
   components: {
@@ -188,13 +203,43 @@ export default {
         .then(res => {
           this.products = res.data.products
           console.log('商品列表:', res.data.products)
+          this.findProductIndex()
         })
     },
     findProductIndex () {
-      // this.products
+      this.productIndex = this.products.findIndex(item => item.id === this.product.id)
+      console.log(this.productIndex)
     },
     setThumbsSwiper (swiper) {
       this.thumbsSwiper = swiper
+    },
+    qtyPlus () {
+      this.productQty++
+      this.$refs.minus.classList.remove('disable')
+    },
+    qtyMinus () {
+      if (this.productQty <= 2) {
+        this.productQty--
+        this.$refs.minus.classList.add('disable')
+      } else {
+        this.productQty--
+      }
+    },
+    addCart () {
+      const data = {
+        product_id: this.product.id,
+        qty: this.productQty
+      }
+      const url = `${VITE_APP_URL}api/${VITE_APP_PATH}/cart`
+      this.$http.post(url, { data })
+        .then(res => {
+          // this.carts = res.data.products
+          console.log('購物車列表:', res.data)
+          alert('已加入購物車')
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   mounted () {
