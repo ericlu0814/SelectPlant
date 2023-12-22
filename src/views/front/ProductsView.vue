@@ -28,30 +28,6 @@
         </div>
       </div>
     </section>
-    <div class="cart">
-      <div class="cart_bg"></div>
-      <div class="cart_box">
-        <div class="cart_wrap">
-          <div class="cart_title">購物車</div>
-          <div class="cart_list">
-            <!-- {{ cart.product }} -->
-            <div class="cart_item" v-for="cart in carts" :key="cart.id">
-              <div class="pd_img">
-                <img :src="cart.product.imageUrl" alt="">
-              </div>
-              <div class="pd_right">
-                <div class="pd_name">{{ cart.product.title }}</div>
-                <div class="pd_num">{{ cart.qty }} 棵</div>
-                <div class="pd_price">{{ cart.product.price }}</div>
-                <div class="pd_remove">
-                  <div class="btn_common" @click="removeProduct(cart)">刪除</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
   <!-- <RouterLink></RouterLink> -->
 </template>
@@ -63,8 +39,7 @@ const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data () {
     return {
-      products: [],
-      carts: []
+      products: []
     }
   },
   components: {
@@ -78,29 +53,10 @@ export default {
           this.products = res.data.products
           console.log('商品列表:', res.data.products)
         })
-    },
-    getCarts () {
-      const url = `${VITE_APP_URL}api/${VITE_APP_PATH}/cart`
-      this.$http.get(url)
-        .then(res => {
-          this.carts = res.data.data.carts
-          console.log('購物車列表:', res.data.data.carts)
-        })
-    },
-    removeProduct (cart) {
-      const url = `${VITE_APP_URL}api/${VITE_APP_PATH}/cart/${cart.product.id}`
-      console.log(cart.product.id)
-      this.$http.delete(url)
-        .then(res => {
-          console.log(res)
-          this.getCarts()
-          // console.log('購物車列表:', res.data.data.carts)
-        })
     }
   },
   mounted () {
     this.getProducts()
-    this.getCarts()
   }
 }
 </script>

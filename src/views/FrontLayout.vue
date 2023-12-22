@@ -17,6 +17,7 @@
         </div>
       </div>
     </header>
+    <Front-cart></Front-cart>
     <!-- <hr> -->
     <div class="cont">
       <RouterView></RouterView>
@@ -60,10 +61,10 @@
 
 <script>
 // import { RouterView } from 'vue-router'
-
+import FrontCart from '@/components/FrontCart.vue'
 export default {
-  // components: {
-  //   RouterView
-  // }
+  components: {
+    FrontCart
+  }
 }
 </script>
